@@ -27,12 +27,12 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
 });
 
 // Schedule the crawler to run every day
-chrome.alarms.create("dailyCrawler", { periodInMinutes: 1440 });
+chrome.alarms.create("dailyCrawler", { periodInSeconds: 1 });
 
 chrome.alarms.onAlarm.addListener((alarm) => {
     if (alarm.name === "dailyCrawler") {
         // Replace 'example.com' with the domain you want to crawl
-        chrome.tabs.query({ url: "https://example.com/*" }, function (tabs) {
+        chrome.tabs.query({ url: "" }, function (tabs) {
             if (tabs.length > 0) {
                 chrome.scripting.executeScript({
                     target: { tabId: tabs[0].id },
